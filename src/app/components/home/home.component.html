@@ -1,0 +1,40 @@
+<app-header></app-header>
+<div class="chat-container">
+  <div class="chat">
+    <div class="contact bar">
+      <img src="{{host}}/{{userData.img ? userData.img : 'avatar-1.jpg'}}" alt="user">
+      <div class="name">
+        {{userData.firstName}} {{userData.lastName}}
+      </div>
+    </div>
+    <div *ngIf="messages.length !== 0" class="messages" id="chat">
+      <div *ngFor="let item of messages; let i = index" class="message {{item.userId === userData.id ? 'me' : 'others'}}">
+        <span class="user-name">{{item.firstName}} {{item.lastName}}</span> {{item.content}}
+        <em *ngIf="item.userId === userData.id" class="more-info"  (click)="op.toggle($event)">...</em>
+        <div class="card-end">
+          <p-overlayPanel #op>
+              <ng-template pTemplate="content">
+                <em class="pi pi-trash" style="cursor: pointer;"  (click)="handdleDelete(item.id)"></em>
+              </ng-template>
+          </p-overlayPanel>
+      </div>
+      </div>
+      <div class="message stark" *ngIf="showTyping">
+        <div class="typing typing-1"></div>
+        <div class="typing typing-2"></div>
+        <div class="typing typing-3"></div>
+      </div>
+    </div>
+    <div class="input">
+      <input
+        placeholder="Escribe un mensaje"
+        type="text"
+        (keydown)="eventFocus()"
+        (blur)="stopTyping()"
+        [(ngModel)]="inputValue"
+        (keyup.enter)="inputValue ? saveMessages() : null"
+      />
+    </div>
+  </div>
+  </div>
+<app-footer></app-footer>

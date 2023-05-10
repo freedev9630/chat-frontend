@@ -1,0 +1,35 @@
+<header>
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="/" [routerLinkActive]="['is-active']">
+          <img [src]="logo" alt="Logo" loading="lazy"/>
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/" [routerLinkActive]="['is-active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Inicio
+        </a>
+      </li>
+      <li *ngIf="showMenuLogin">
+        <a
+          routerLink="/login" [routerLinkActive]="['is-active']"
+        >
+          Iniciar sesión
+        </a>
+      </li>
+      <li *ngIf="!showMenuLogin">
+        <a
+          [routerLinkActive]="['is-active']"
+          (click)="logout()"
+          class="cursor-pointer"
+        >
+          Cerrar sesión
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,63 @@
+<section class="form-container">
+  <article class="form-content">
+    <form [formGroup]="formGroup" (submit)="handdleRegister()">
+      <h3>Hola</h3>
+      <p>Registra tus datos</p>
+      <div class="form-control">
+        <span class="p-input-icon-left">
+          <input type="text" pInputText formControlName="firstName" placeholder="Nombres"/>
+        </span>
+      </div>
+      <div class="form-control">
+        <span class="p-input-icon-left">
+          <input type="text" pInputText formControlName="lastName" placeholder="Apellidos"/>
+        </span>
+      </div>
+      <div class="form-control">
+        <span class="p-input-icon-left">
+          <i class="pi pi-user"></i>
+          <input type="text" pInputText formControlName="email" placeholder="Correo"/>
+        </span>
+      </div>
+      <div class="form-control">
+        <span class="p-input-icon-left">
+          <i class="pi pi-key"></i>
+          <input type="password" pInputText formControlName="password" placeholder="Contraseña"/>
+        </span>
+      </div>
+      <div class="form-control">
+        <p-fileUpload
+            (onSelect)="onUpload($event)"
+            [multiple]="false"
+            [fileLimit]="1"
+            accept="image/*"
+            [maxFileSize]="1000000"
+            [showCancelButton]="false"
+            [showUploadButton]="false"
+            (onRemove)="getFile($event)"
+        >
+            <!-- <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+            </ng-template> -->
+        </p-fileUpload>
+      </div>
+      <div class="form-control">
+        <p-button type="submit" [disabled]="formGroup.invalid || loading" label="Registrarse" (onClick)="handdleRegister()"></p-button>
+      </div>
+      <div class="form-control">
+        <p>¿ Ya tienes una cuenta ? <a routerLink="/login">Iniciar Sesión</a></p>
+      </div>
+    </form>
+  </article>
+  <article class="bg-blue"></article>
+  <article class="bg-orange"></article>
+  <article class="bg-green"></article>
+</section>
+<app-alert
+  [open]="alertConfig.open"
+  [singleMessage]="alertConfig.singleMessage"
+  [severity]="alertConfig.severity"
+  (eventCloseToast)="closeAlert()"
+></app-alert>

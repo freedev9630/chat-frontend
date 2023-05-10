@@ -1,0 +1,35 @@
+<section class="form-container">
+  <article class="form-content">
+    <form [formGroup]="formGroup" (submit)="handdleLogin()">
+      <h3>Hola</h3>
+      <p>Ingresa tus datos</p>
+      <div class="form-control">
+        <span class="p-input-icon-left">
+          <i class="pi pi-user"></i>
+          <input type="text" pInputText formControlName="email" placeholder="Correo"/>
+        </span>
+      </div>
+      <div class="form-control">
+        <span class="p-input-icon-left">
+          <i class="pi pi-key"></i>
+          <input type="password" pInputText formControlName="password" placeholder="Contraseña"/>
+        </span>
+      </div>
+      <div class="form-control">
+        <p-button type="submit" [disabled]="formGroup.invalid || loading" label="Login" (onClick)="handdleLogin()"></p-button>
+      </div>
+      <div class="form-control">
+        <p>¿ No tienes una cuenta ? <a routerLink="/register">Regístrate</a></p>
+      </div>
+    </form>
+  </article>
+  <article class="bg-blue"></article>
+  <article class="bg-orange"></article>
+  <article class="bg-green"></article>
+</section>
+<app-alert
+  [open]="alertConfig.open"
+  [singleMessage]="alertConfig.singleMessage"
+  [severity]="alertConfig.severity"
+  (eventCloseToast)="closeAlert()"
+></app-alert>
