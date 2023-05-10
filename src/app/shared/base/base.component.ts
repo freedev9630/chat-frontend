@@ -20,27 +20,12 @@ export class BaseComponent<GET = {}, POST = {}, PUT = {}, PATCH = {}, DELETE = {
     get: this.paramsValue,
     post: this.paramsValue,
   };
-  alertDelete = '¿ Está seguro de eliminar este registro ?';
-  /** flag para el mensaje eliminar */
-  deleteMessage = 'Los datos se eliminaron correctamente';
-  /** flag para el mensaje crear */
-  createMessage = 'Los datos se guardaron correctamente';
-  /** flag para el mensaje actualizar */
-  updateMessage = 'Los datos se actualizaron correctamente';
-  /** mensaje para el mensaje error */
-  errorMessage = 'Ha ocurrido un error procesando los datos';
-  // Total elementos de un registro
   loading = false;
   alertConfig = new AlertModel.AlertaClass(
     false,
     'Ha ocurrido un error',
     AlertModel.AlertSeverity.ERROR
   );
-  /** Acción ejecutada por el usuario */
-  currentUserAction = '';
-  customCrudAction = '';
-  currentScreen = '';
-  enableAuditoria = false;
   formGroup: FormGroup = new FormGroup({});
   host = UriConstants.HOST;
   constructor(
@@ -60,8 +45,7 @@ export class BaseComponent<GET = {}, POST = {}, PUT = {}, PATCH = {}, DELETE = {
 
   public create(payload: ApiModel.ReqParams) {
     return this.createService(payload).subscribe({
-      next: (response) => {
-        this.alertConfiguration('SUCCESS', this.createMessage);
+      next: () => {
         this.openAlert();
       },
 
@@ -88,33 +72,9 @@ export class BaseComponent<GET = {}, POST = {}, PUT = {}, PATCH = {}, DELETE = {
 
   public read(payload: ApiModel.ReqParams) {
     return this.getService(payload).subscribe({
-      next: (response) => {
+      next: () => {
       },
-      error: err => {
-        this.loading = false;
-      },
-      complete: () => {
-        this.loading = false;
-      },
-    });
-  }
-
-  public update(payload: ApiModel.ReqParams) {
-    this.loading = true;
-    const params = {
-      url: payload.url,
-      data: payload.data,
-    };
-
-    return this.apiService.patchService(params).subscribe({
-      next: (response) => {
-        this.alertConfiguration('SUCCESS', this.updateMessage);
-        this.openAlert();
-      },
-
-      error: err => {
-        this.alertConfiguration('ERROR', err);
-        this.openAlert();
+      error: () => {
         this.loading = false;
       },
       complete: () => {
@@ -131,8 +91,7 @@ export class BaseComponent<GET = {}, POST = {}, PUT = {}, PATCH = {}, DELETE = {
     };
 
     return this.apiService.deleteService(params).subscribe({
-      next: (response) => {
-        this.alertConfiguration('SUCCESS', this.deleteMessage);
+      next: () => {
         this.openAlert();
       },
       error: err => {

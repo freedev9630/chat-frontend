@@ -2,19 +2,19 @@
 <div class="chat-container">
   <div class="chat">
     <div class="contact bar">
-      <img src="{{host}}/{{userData.img ? userData.img : 'avatar-1.jpg'}}" alt="user">
+      <img src="" alt="user">
       <div class="name">
-        {{userData.firstName}} {{userData.lastName}}
+        Juan Doe
       </div>
     </div>
-    <div *ngIf="messages.length !== 0" class="messages" id="chat">
-      <div *ngFor="let item of messages; let i = index" class="message {{item.userId === userData.id ? 'me' : 'others'}}">
-        <span class="user-name">{{item.firstName}} {{item.lastName}}</span> {{item.content}}
-        <em *ngIf="item.userId === userData.id" class="more-info"  (click)="op.toggle($event)">...</em>
+    <div class="messages" id="chat">
+      <div class="message {{true ? 'me' : 'others'}}">
+        <span class="user-name">Juan Doe</span> Hola
+        <em *ngIf="true" class="more-info"  (click)="op.toggle($event)">...</em>
         <div class="card-end">
           <p-overlayPanel #op>
               <ng-template pTemplate="content">
-                <em class="pi pi-trash" style="cursor: pointer;"  (click)="handdleDelete(item.id)"></em>
+                <em class="pi pi-trash" style="cursor: pointer;"></em>
               </ng-template>
           </p-overlayPanel>
       </div>
@@ -29,10 +29,6 @@
       <input
         placeholder="Escribe un mensaje"
         type="text"
-        (keydown)="eventFocus()"
-        (blur)="stopTyping()"
-        [(ngModel)]="inputValue"
-        (keyup.enter)="inputValue ? saveMessages() : null"
       />
     </div>
   </div>

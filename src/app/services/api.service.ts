@@ -50,14 +50,6 @@ export class ApiService<GET = {}, POST = {}, PUT = {}, PATCH = {}, DELETE = {}> 
     );
   }
 
-  /** Para realizar las peticiones PUT*/
-  putService(reqParams: ApiModel.ReqParams): Observable<ApiModel.ResponseParams<PUT>> {
-    return this.http.put<ApiModel.ResponseParams<PUT>>(reqParams.url, reqParams.data).pipe(
-      map((res) => res),
-      catchError(this.handleError)
-    );
-  }
-
   /** Para realizar las peticiones DELETE*/
   deleteService(reqParams: ApiModel.ReqParams): Observable<ApiModel.ResponseParams<DELETE>> {
     const options = {
@@ -65,14 +57,6 @@ export class ApiService<GET = {}, POST = {}, PUT = {}, PATCH = {}, DELETE = {}> 
       params: reqParams.params,
     };
     return this.http.delete<ApiModel.ResponseParams<DELETE>>(reqParams.url, options).pipe(
-      map((res) => res),
-      catchError(this.handleError)
-    );
-  }
-
-  /** Para realizar las peticiones PATCH*/
-  patchService(reqParams: ApiModel.ReqParams): Observable<ApiModel.ResponseParams<PATCH>> {
-    return this.http.patch<ApiModel.ResponseParams<PATCH>>(reqParams.url, reqParams.data).pipe(
       map((res) => res),
       catchError(this.handleError)
     );

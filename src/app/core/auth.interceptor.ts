@@ -9,8 +9,6 @@ import { Observable } from 'rxjs';
 import { LocalStorageConstants } from '../utils/local.storage';
 @Injectable({ providedIn: 'root' })
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(
-  ) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
